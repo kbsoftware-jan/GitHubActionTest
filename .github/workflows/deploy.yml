@@ -25,7 +25,7 @@ jobs:
        run: |
          dotnet public -c Release -o .\myapp
      
-     - name: D2ploy to IIS
+     - name: Deploy to IIS
        shell: cmd
        run: |
          iisreset /stop
