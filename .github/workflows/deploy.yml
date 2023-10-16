@@ -32,8 +32,30 @@
 #          xcopy /s /y .\myapp\* c:\www\PublishASPCoreTest
 #          iisreset /start
 
-- name: Deploy to IIS
-      run: |
-        iisreset /stop
-        Copy-Item ./dotnetcorewebapp/* C:/inetpub/wwwroot/dotnetcore-webapp -Recurse -Force
-        iisreset /start
+name: My .NET Action
+
+on:
+  workflow_dispatch
+
+jobs:
+  build:
+    runs-on: self-hosted
+    
+    defaults:
+      run:
+        shell: cmd
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+    - name: Stop example.com
+      run: appcmd stop sites "example.com"
+    - name: Publish Release
+      run: dotnet publish example.com --configuration Release -o C:\Path\To\Website\www\example.com
+    - name: Start example.com
+      run: appcmd start sites "example.com"
