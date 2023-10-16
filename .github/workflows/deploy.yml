@@ -56,6 +56,6 @@ jobs:
     - name: Stop example.com
       run: iisreset /stop
     - name: Publish Release
-      run: dotnet publish example.com --configuration Release -o C:\www\gh-actions-iis-test.dk
+      run: dotnet publish GitHubActionTest --configuration Release -o C:\www\gh-actions-iis-test.dk
     - name: Start example.com
       run: iisreset /start
