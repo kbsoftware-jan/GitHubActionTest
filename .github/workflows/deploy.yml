@@ -54,8 +54,8 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Stop example.com
-      run: appcmd stop sites "example.com"
+      run: iisreset /stop
     - name: Publish Release
-      run: dotnet publish example.com --configuration Release -o C:\Path\To\Website\www\example.com
+      run: dotnet publish example.com --configuration Release -o C:\www\gh-actions-iis-test.dk
     - name: Start example.com
-      run: appcmd start sites "example.com"
+      run: iisreset /start
