@@ -54,6 +54,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Stop example.com
+    #iisreset /stop /server:<ServerName>
       run: iisreset /stop
     - name: Publish Release
       run: dotnet publish GitHubActionTest --configuration Release -o C:\www\PublishASPCoreTest
