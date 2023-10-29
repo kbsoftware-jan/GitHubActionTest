@@ -1,0 +1,25 @@
+name: SQL Server Deployment
+
+on:
+  push:
+    branches:
+      - main  # Adjust the branch name as needed
+
+jobs:
+  deploy:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Download DACPAC
+      run: |
+        # Replace 'dacpacs/bid.dacpac' with the correct path in your repository
+        curl -LJO https://github.com/${{ github.repository }}/raw/main/dacpacs/bid.dacpac
+      shell: cmd
+
+    - name: Deploy to SQL Server
+      run: |
+        SqlPackage.exe /a:publish /tsn:"localhost" /tdn:"BiD.Net" /sf:"bid.dacpac" /p:RegisterDataTierApplication=true /p:BlockWhenDriftDetected=false /ttsc:"True"
+      shell: cmd
