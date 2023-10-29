@@ -1,13 +1,11 @@
 name: SQL Server Deployment
 
 on:
-  push:
-    branches:
-      - main  # Adjust the branch name as needed
+  workflow_dispatch
 
 jobs:
   deploy:
-    runs-on: windows-latest
+    runs-on: self-hosted
 
     steps:
     - name: Checkout code
@@ -16,10 +14,10 @@ jobs:
     - name: Download DACPAC
       run: |
         # Replace 'dacpacs/bid.dacpac' with the correct path in your repository
-        curl -LJO https://github.com/${{ github.repository }}/raw/main/dacpacs/bid.dacpac
+        curl -LJO https://github.com/kbsoftware-jan/GitHubActionTest.git/raw/main/dacpacs/*
       shell: cmd
 
     - name: Deploy to SQL Server
       run: |
-        SqlPackage.exe /a:publish /tsn:"localhost" /tdn:"BiD.Net" /sf:"bid.dacpac" /p:RegisterDataTierApplication=true /p:BlockWhenDriftDetected=false /ttsc:"True"
+        SqlPackage.exe /a:publish /tsn:"localhost" /tdn:"BiD.Net" /sf:"dacpacs/bid.dacpac" /p:RegisterDataTierApplication=true /p:BlockWhenDriftDetected=false /ttsc:"True"
       shell: cmd
