@@ -21,8 +21,9 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Stop example.com
-      run: iisreset /stop /server:PublishASPCoreTest
+      #run: iisreset /stop /server:PublishASPCoreTest
+      run: %windir%\syswow64\inetsrv\appcmd stop site /site.name:PublishASPCoreTest
     - name: Publish Release
       run: dotnet publish GitHubActionTest --configuration Release -o C:\www\PublishASPCoreTest
     - name: Start example.com
-      run: iisreset /start /server:PublishASPCoreTest
+      run: %windir%\syswow64\inetsrv\appcmd start site /site.name:PublishASPCoreTest
