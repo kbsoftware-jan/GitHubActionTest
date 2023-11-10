@@ -18,27 +18,22 @@ jobs:
 
     - name: Stop and Uninstall Existing Windows Service
       run: |
-        # Stop the service if it's running
         net stop GitWinService || true
         
-        # Uninstall the existing service
         installUtil.exe /u "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GitWinService.exe" || true
       shell: cmd
 
     - name: Download Windows Service from GitHub
       run: |
-        # Replace 'WindowsService' with the correct path in your repository
         curl -LJO https://github.com/kbsoftware-jan/GitHubActionTest.git/raw/main/WindowsService/*
       shell: cmd
 
     - name: Replace Local Folder with GitHub Folder
       run: |
-        # Replace the contents of the local folder with the downloaded folder
         xcopy /E /Y "${GITHUB_WORKSPACE}\WindowsService\*" "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug"
       shell: cmd
 
     - name: Install and Start New Windows Service
       run: |
-        # Install and start the new service
         installUtil.exe "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GithubWinService.exe" && net start GitWinService
       shell: cmd
