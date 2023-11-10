@@ -14,7 +14,7 @@ jobs:
     - name: Stop/Uninstall Existing Service
       run: |
         net stop GitWinService || true
-        "C:\Windows\Microsoft.NET\Framework\v4.0.30319\installUtil.exe" /u "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GitWinService.exe" || true
+        "C:\Windows\Microsoft.NET\Framework\v4.0.30319\installUtil.exe" /u "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GithubWinService.exe" || true
       shell: cmd
 
     - name: Download Windows Service from GitHub
