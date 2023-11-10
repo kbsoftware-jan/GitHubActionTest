@@ -17,14 +17,9 @@ jobs:
         sc delete service1 || echo Service was already deleted
       shell: cmd
 
-    - name: Download Windows Service from GitHub
-      run: |
-        curl -LJO https://github.com/kbsoftware-jan/GitHubActionTest.git/raw/main/WindowsService/*
-      shell: cmd
-
     - name: Replace Local Folder with GitHub Folder
       run: |
-        xcopy /E /Y "${GITHUB_WORKSPACE}\WindowsService\*" "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug"
+        xcopy /E /Y https://github.com/kbsoftware-jan/GitHubActionTest.git/raw/main/WindowsService\*" "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug"
       shell: cmd
 
     - name: Install and Start New Service
