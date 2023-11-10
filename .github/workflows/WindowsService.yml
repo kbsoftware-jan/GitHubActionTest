@@ -11,12 +11,26 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Change Path to .NET Framework and Deploy Windows Service
+    - name: Change Path to .NET Framework and Stop/Uninstall Existing Service
       run: |
         cd "C:\Windows\Microsoft.NET\Framework\v4.0.30319" && \
         net stop GitWinService || true && \
-        installUtil.exe /u "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GitWinService.exe" || true && \
-        curl -LJO https://github.com/kbsoftware-jan/GitHubActionTest.git/raw/main/WindowsService/* && \
-        xcopy /E /Y "${GITHUB_WORKSPACE}\WindowsService\*" "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug" && \
+        installUtil.exe /u "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GitWinService.exe" || true
+      shell: cmd
+
+    - name: Download Windows Service from GitHub
+      run: |
+        curl -LJO https://github.com/kbsoftware-jan/GitHubActionTest.git/raw/main/WindowsService/*
+      shell: cmd
+
+    - name: Change Path to .NET Framework and Replace Local Folder with GitHub Folder
+      run: |
+        cd "C:\Windows\Microsoft.NET\Framework\v4.0.30319" && \
+        xcopy /E /Y "${GITHUB_WORKSPACE}\WindowsService\*" "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug"
+      shell: cmd
+
+    - name: Change Path to .NET Framework and Install/Start New Service
+      run: |
+        cd "C:\Windows\Microsoft.NET\Framework\v4.0.30319" && \
         installUtil.exe "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GithubWinService.exe" && net start GitWinService
       shell: cmd
