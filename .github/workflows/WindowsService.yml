@@ -24,7 +24,7 @@ jobs:
 
     - name: Install and Start New Service
       run: |
-        "C:\Windows\Microsoft.NET\Framework\v4.0.30319\installUtil.exe" "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GithubWinService.exe" && net start GithubWinService
+        "C:\Windows\Microsoft.NET\Framework\v4.0.30319\installUtil.exe" "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GithubWinService.exe" && net start service1
       shell: cmd
 
 
