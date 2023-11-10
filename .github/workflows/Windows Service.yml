@@ -1,0 +1,33 @@
+name: Windows Service Deployment
+
+on:
+  workflow_dispatch
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Download Windows Service
+      run: |
+        # Replace 'windowsService' with the correct path in your repository
+        curl -LJO https://github.com/kbsoftware-jan/GitHubActionTest.git/raw/main/windowsService/*
+      shell: cmd
+
+    - name: Stop and Uninstall Existing Windows Service
+      run: |
+        # Stop the service if it's running
+        net stop GitWinService || true
+        
+        # Uninstall the existing service
+        installUtil.exe /u "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GitWinService.exe" || true
+      shell: cmd
+
+    - name: Install and Start New Windows Service
+      run: |
+        # Install and start the new service
+        installUtil.exe "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GithubWinService.exe" && net start GitWinService
+      shell: cmd
