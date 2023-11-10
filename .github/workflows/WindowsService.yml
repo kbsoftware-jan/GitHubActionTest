@@ -13,8 +13,8 @@ jobs:
 
     - name: Stop and Uninstall Existing Service
       run: |
-        net stop Service1 || echo Service was already stoped
-        sc delete Service1 || echo Service was already deleted
+        net stop service1 || echo Service was already stoped
+        sc delete service1 || echo Service was already deleted
       shell: cmd
 
     - name: Download Windows Service from GitHub
