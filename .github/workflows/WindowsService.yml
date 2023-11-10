@@ -13,8 +13,8 @@ jobs:
 
     - name: Change Path to .NET Framework and Stop/Uninstall Existing Service
       run: |
-        cd "C:\Windows\Microsoft.NET\Framework\v4.0.30319" &&
-        net stop GitWinService || true &&
+        cd "C:\Windows\Microsoft.NET\Framework\v4.0.30319"
+        net stop GitWinService || true
         installUtil.exe /u "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GitWinService.exe" || true
       shell: cmd
 
@@ -25,12 +25,12 @@ jobs:
 
     - name: Change Path to .NET Framework and Replace Local Folder with GitHub Folder
       run: |
-        cd "C:\Windows\Microsoft.NET\Framework\v4.0.30319" &&
+        cd "C:\Windows\Microsoft.NET\Framework\v4.0.30319"
         xcopy /E /Y "${GITHUB_WORKSPACE}\WindowsService\*" "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug"
       shell: cmd
 
     - name: Change Path to .NET Framework and Install/Start New Service
       run: |
-        cd "C:\Windows\Microsoft.NET\Framework\v4.0.30319" &&
+        cd "C:\Windows\Microsoft.NET\Framework\v4.0.30319"
         installUtil.exe "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GithubWinService.exe" && net start GitWinService
       shell: cmd
