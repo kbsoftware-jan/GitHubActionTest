@@ -13,8 +13,8 @@ jobs:
 
     - name: Stop and Uninstall Existing Service
       run: |
-        net stop GithubWinService
-        sc delete GithubWinService
+        net stop GitWinService
+        sc delete GitWinService
       shell: cmd
 
     - name: Download Windows Service from GitHub
