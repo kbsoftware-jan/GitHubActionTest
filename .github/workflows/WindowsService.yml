@@ -17,10 +17,9 @@ jobs:
     #     sc delete service1 || echo Service was already deleted
     #   shell: cmd
 
-    - name: Replace Local Folder with GitHub Folder
+    - name: Copy Folder to Local Machine
       run: |
-         cp -r WindowsService "C:\\Users\\hp\\source\\repos\\GithubWinService\\GithubWinService\\bin\\Debug"
-      shell: cmd
+        Copy-Item -Path WindowsService\* -Destination "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug" -Recurse
 
     - name: Install and Start New Service
       run: |
