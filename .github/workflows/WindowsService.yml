@@ -31,8 +31,6 @@ jobs:
       run: |
         "C:\Windows\Microsoft.NET\Framework\v4.0.30319\installUtil.exe" "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GithubWinService.exe" && net start GitWinService
       shell: cmd
-This version uses the full paths without any cd commands. Please adjust the paths as needed for your environment and test the workflow to ensure it meets your requirements.
-
 
 
 
