@@ -11,10 +11,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Stop/Uninstall Existing Service
+    - name: Stop and Uninstall Existing Service
       run: |
-        net stop GitWinService || true
-        "C:\Windows\Microsoft.NET\Framework\v4.0.30319\installUtil.exe" /u "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GithubWinService.exe" || true
+        net stop GithubWinService
+        sc delete GithubWinService
       shell: cmd
 
     - name: Download Windows Service from GitHub
@@ -27,9 +27,9 @@ jobs:
         xcopy /E /Y "${GITHUB_WORKSPACE}\WindowsService\*" "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug"
       shell: cmd
 
-    - name: Install/Start New Service
+    - name: Install and Start New Service
       run: |
-        "C:\Windows\Microsoft.NET\Framework\v4.0.30319\installUtil.exe" "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GithubWinService.exe" && net start GitWinService
+        "C:\Windows\Microsoft.NET\Framework\v4.0.30319\installUtil.exe" "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GithubWinService.exe" && net start GithubWinService
       shell: cmd
 
 
