@@ -11,10 +11,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Download Windows Service
+    - name: Change Path to .NET Framework
       run: |
-        # Replace 'windowsService' with the correct path in your repository
-        curl -LJO https://github.com/kbsoftware-jan/GitHubActionTest.git/raw/main/windowsService/*
+        cd "C:\Windows\Microsoft.NET\Framework\v4.0.30319"
       shell: cmd
 
     - name: Stop and Uninstall Existing Windows Service
@@ -24,6 +23,18 @@ jobs:
         
         # Uninstall the existing service
         installUtil.exe /u "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GitWinService.exe" || true
+      shell: cmd
+
+    - name: Download Windows Service from GitHub
+      run: |
+        # Replace 'WindowsService' with the correct path in your repository
+        curl -LJO https://github.com/kbsoftware-jan/GitHubActionTest.git/raw/main/WindowsService/*
+      shell: cmd
+
+    - name: Replace Local Folder with GitHub Folder
+      run: |
+        # Replace the contents of the local folder with the downloaded folder
+        xcopy /E /Y "${GITHUB_WORKSPACE}\WindowsService\*" "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug"
       shell: cmd
 
     - name: Install and Start New Windows Service
