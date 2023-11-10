@@ -7,33 +7,21 @@ jobs:
   deploy:
     runs-on: self-hosted
 
-    steps:
+     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Change Path to .NET Framework
+    - name: Change Path to .NET Framework and Deploy Windows Service
       run: |
         cd "C:\Windows\Microsoft.NET\Framework\v4.0.30319"
-      shell: cmd
-
-    - name: Stop and Uninstall Existing Windows Service
-      run: |
+        
         net stop GitWinService || true
         
         installUtil.exe /u "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GitWinService.exe" || true
-      shell: cmd
-
-    - name: Download Windows Service from GitHub
-      run: |
+        
         curl -LJO https://github.com/kbsoftware-jan/GitHubActionTest.git/raw/main/WindowsService/*
-      shell: cmd
-
-    - name: Replace Local Folder with GitHub Folder
-      run: |
+        
         xcopy /E /Y "${GITHUB_WORKSPACE}\WindowsService\*" "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug"
-      shell: cmd
-
-    - name: Install and Start New Windows Service
-      run: |
+        
         installUtil.exe "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GithubWinService.exe" && net start GitWinService
       shell: cmd
