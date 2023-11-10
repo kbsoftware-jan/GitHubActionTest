@@ -11,11 +11,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    # - name: Stop and Uninstall Existing Service
-    #   run: |
-    #     net stop service1 || echo Service was already stoped
-    #     sc delete service1 || echo Service was already deleted
-    #   shell: cmd
+    - name: Stop and Uninstall Existing Service
+      run: |
+        net stop service1 || echo Service was already stoped
+        sc delete service1 || echo Service was already deleted
+      shell: cmd
 
     - name: Copy Folder to Local Machine
       run: |
