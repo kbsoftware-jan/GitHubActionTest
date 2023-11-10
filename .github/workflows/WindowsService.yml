@@ -11,15 +11,15 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Stop and Uninstall Existing Service
-      run: |
-        net stop service1 || echo Service was already stoped
-        sc delete service1 || echo Service was already deleted
-      shell: cmd
+    # - name: Stop and Uninstall Existing Service
+    #   run: |
+    #     net stop service1 || echo Service was already stoped
+    #     sc delete service1 || echo Service was already deleted
+    #   shell: cmd
 
     - name: Replace Local Folder with GitHub Folder
       run: |
-        xcopy /E /Y "${GITHUB_WORKSPACE}\\WindowsService\\*" "C:\\Users\\hp\\source\\repos\\GithubWinService\\GithubWinService\\bin\\Debug"
+         cp -r WindowsService "C:\\Users\\hp\\source\\repos\\GithubWinService\\GithubWinService\\bin\\Debug"
       shell: cmd
 
     - name: Install and Start New Service
