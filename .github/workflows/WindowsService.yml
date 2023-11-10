@@ -32,5 +32,6 @@ jobs:
     - name: Change Path to .NET Framework and Install/Start New Service
       run: |
         cd "C:\Windows\Microsoft.NET\Framework\v4.0.30319"
-        installUtil.exe "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GithubWinService.exe" && net start GitWinService
+        installUtil.exe "C:\Users\hp\source\repos\GithubWinService\GithubWinService\bin\Debug\GithubWinService.exe"
+        net start GitWinService
       shell: cmd
