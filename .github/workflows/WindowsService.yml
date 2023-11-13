@@ -18,22 +18,19 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Test
-      run: echo ${{ env.SERVICE_FOLDER_PATH}}
-
     - name: Stop and Uninstall Existing Service
       run: |
-        net stop $SERVICE_NAME || echo Service was already stoped
-        sc delete $SERVICE_NAME || echo Service was already deleted
+        net stop ${{ env.SERVICE_NAME}} || echo Service was already stoped
+        sc delete ${{ $SERVICE_NAME}} || echo Service was already deleted
       shell: cmd
 
     - name: Copy Folder to Local Machine
       run: |
-        Copy-Item -Path $GITHUB_FOLDER_NAME\* -Destination $SERVICE_FOLDER_PATH -Recurse
+        Copy-Item -Path ${{ env.GITHUB_FOLDER_NAME}}\* -Destination ${{ env.SERVICE_FOLDER_PATH}} -Recurse
 
     - name: Install and Start New Service
       run: |
-        "C:\Windows\Microsoft.NET\Framework\v4.0.30319\installUtil.exe" $SERVICE_FOLDER_PATH\$EXE_NAME && net start $SERVICE_NAME
+        "C:\Windows\Microsoft.NET\Framework\v4.0.30319\installUtil.exe" ${{ env.SERVICE_FOLDER_PATH\$EXE_NAME}} && net start ${{ env.SERVICE_NAME}}
       shell: cmd
 
 
