@@ -1,8 +1,10 @@
-
-name: My .NET Action
-
+name: Deploty to IIS
 on:
   workflow_dispatch
+env:
+  SERVER_NAME: "PublishASPCoreTest"
+  GITHUB_FOLDER_NAME: "GitHubActionTest"
+  FILE_PATH: "C:/www/PublishASPCoreTest"
 
 jobs:
   build:
@@ -11,7 +13,6 @@ jobs:
     defaults:
       run:
         shell: cmd
-
     steps:
     - uses: actions/checkout@v3
     - name: Restore dependencies
@@ -20,10 +21,9 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: Stop example.com
-      #run: iisreset /stop /server:PublishASPCoreTest
-      run: cmd /c %windir%\syswow64\inetsrv\appcmd stop site /site.name:PublishASPCoreTest
+    - name: Stop server
+      run: cmd /c %windir%\syswow64\inetsrv\appcmd stop site /site.name:$SERVER_NAME
     - name: Publish Release
-      run: dotnet publish GitHubActionTest --configuration Release -o C:\www\PublishASPCoreTest
-    - name: Start example.com
-      run: cmd /c %windir%\syswow64\inetsrv\appcmd start site /site.name:PublishASPCoreTest
+      run: dotnet publish $GITHUB_FOLDER_NAME --configuration Release -o $FILE_PATH
+    - name: Start server
+      run: cmd /c %windir%\syswow64\inetsrv\appcmd start site /site.name:$SERVER_NAME
