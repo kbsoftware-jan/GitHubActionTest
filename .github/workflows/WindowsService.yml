@@ -21,7 +21,7 @@ jobs:
     - name: Stop and Uninstall Existing Service
       run: |
         net stop ${{ env.SERVICE_NAME}} || echo Service was already stoped
-        sc delete ${{ $SERVICE_NAME}} || echo Service was already deleted
+        sc delete ${{ env.SERVICE_NAME}} || echo Service was already deleted
       shell: cmd
 
     - name: Copy Folder to Local Machine
@@ -30,7 +30,7 @@ jobs:
 
     - name: Install and Start New Service
       run: |
-        "C:\Windows\Microsoft.NET\Framework\v4.0.30319\installUtil.exe" ${{ env.SERVICE_FOLDER_PATH\$EXE_NAME}} && net start ${{ env.SERVICE_NAME}}
+        "C:\Windows\Microsoft.NET\Framework\v4.0.30319\installUtil.exe" ${{ env.SERVICE_FOLDER_PATH}}\${{ env.EXE_NAME}} && net start ${{ env.SERVICE_NAME}}
       shell: cmd
 
 
