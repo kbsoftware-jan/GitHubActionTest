@@ -18,6 +18,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Exporting variables
+      run: echo "GH_PAT=$(echo $GH_PAT)" >> $GITHUB_ENV
+
     - name: Test
       run: echo ${{env.SERVICE_FOLDER_PATH}}
 
