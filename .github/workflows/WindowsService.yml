@@ -28,7 +28,7 @@ jobs:
 
     - name: Copy Folder to Local Machine
       run: |
-        Copy-Item -Path $GITHUB_FOLDER_NAME\* -Destination "$SERVICE_FOLDER_PATH" -Recurse
+        Copy-Item -Path $GITHUB_FOLDER_NAME\* -Destination $SERVICE_FOLDER_PATH -Recurse
 
     - name: Install and Start New Service
       run: |
