@@ -22,8 +22,8 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Stop server
-      run: cmd /c %windir%\syswow64\inetsrv\appcmd stop site /site.name:$SERVER_NAME
+      run: cmd /c %windir%\syswow64\inetsrv\appcmd stop site /site.name:${{ env.SERVER_NAME}}
     - name: Publish Release
-      run: dotnet publish $GITHUB_FOLDER_NAME --configuration Release -o $FILE_PATH
+      run: dotnet publish ${{ env.GITHUB_FOLDER_NAME}} --configuration Release -o ${{ env.FILE_PATH}}
     - name: Start server
-      run: cmd /c %windir%\syswow64\inetsrv\appcmd start site /site.name:$SERVER_NAME
+      run: cmd /c %windir%\syswow64\inetsrv\appcmd start site /site.name:${{ env.SERVER_NAME}}
