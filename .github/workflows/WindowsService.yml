@@ -22,7 +22,6 @@ jobs:
 
     - name: Stop and Uninstall Existing Service
       run: |
-        # net stop $SERVICE_NAME || echo Service was already stoped
         net stop service1 || echo Service was already stoped
         sc delete $SERVICE_NAME || echo Service was already deleted
       shell: cmd
