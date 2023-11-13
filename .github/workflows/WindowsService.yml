@@ -19,7 +19,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Test
-      run: echo $SERVICE_FOLDER_PATH
+      run: echo ${{env.SERVICE_FOLDER_PATH}}
 
     - name: Stop and Uninstall Existing Service
       run: |
