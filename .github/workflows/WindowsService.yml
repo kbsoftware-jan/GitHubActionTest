@@ -18,6 +18,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Test
+      run: echo $SERVICE_FOLDER_PATH
+
     - name: Stop and Uninstall Existing Service
       run: |
         net stop $SERVICE_NAME || echo Service was already stoped
