@@ -23,10 +23,10 @@ jobs:
     - name: Download DACPAC
       run: |
         # Replace 'dacpacs/bid.dacpac' with the correct path in your repository
-        curl -LJO $GITHUB_REPOSITORY/raw/main/$GITHUB_FOLDER_NAME/*
+        curl -LJO ${{ env.GITHUB_REPOSITORY}}/raw/main/${{ env.GITHUB_FOLDER_NAME}}/*
       shell: cmd
 
     - name: Deploy to SQL Server
       run: |
-        SqlPackage.exe /a:publish /tsn:"localhost" /tdn:$DATABASE_NAME /sf:"$GITHUB_FOLDER_NAME/$DATABASE_DACPAC" /p:RegisterDataTierApplication=true /p:BlockWhenDriftDetected=false /ttsc:"True"
+        SqlPackage.exe /a:publish /tsn:"localhost" /tdn:${{ env.DATABASE_NAME}} /sf:${{ env.GITHUB_FOLDER_NAME}}/${{ env.DATABASE_DACPAC}} /p:RegisterDataTierApplication=true /p:BlockWhenDriftDetected=false /ttsc:"True"
       shell: cmd
