@@ -4,7 +4,8 @@ on:
 env:
   SERVER_NAME: "GithubServer"
   GITHUB_FOLDER_NAME: "GitHubActionTest"
-  FILE_PATH: "C:/Users/JanKalina/Documents/GithubRunnerTest/www/GithubServer"
+  FILE_PATH: "C:/www/PublishASPCoreTest"
+  # FILE_PATH: "C:/Users/JanKalina/Documents/GithubRunnerTest/www/GithubServer"
 
 jobs:
   build:
