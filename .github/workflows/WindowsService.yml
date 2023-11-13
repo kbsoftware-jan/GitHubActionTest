@@ -7,7 +7,7 @@ env:
 ############ Replace the variables with your values! #############
   SERVICE_NAME: "service1"
   GITHUB_FOLDER_NAME: "WindowsService"
-  SERVICE_FOLDER_PATH: "C:/Users/hp/source/repos/GithubWinService/GithubWinService/bin/Debug"
+  SERVICE_FOLDER_PATH: "C:\Users\JanKalina\Documents\GithubRunnerTest\WindowsService"
   EXE_NAME: "GithubWinService.exe"
 ####################################################
 
@@ -22,7 +22,7 @@ jobs:
 
     - name: Stop and Uninstall Existing Service
       run: |
-        net stop service1 || echo Service was already stoped
+        net stop $SERVICE_NAME || echo Service was already stoped
         sc delete $SERVICE_NAME || echo Service was already deleted
       shell: cmd
 
